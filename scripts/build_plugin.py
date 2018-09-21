@@ -47,10 +47,6 @@ if __name__ == "__main__":
     plugin_name = os.path.basename(os.path.normpath(full_plugin_path))
     plugin_file_location = plugin_name + ".curapackage"
     with zipfile.ZipFile(plugin_file_location, "w") as plugin_zip:
-        # Ensure that the root folder is created correctly. We need to tell zip to not compress the folder!
-        subdirectory = zipfile.ZipInfo(plugin_name + "/")
-        plugin_zip.writestr(subdirectory, "",
-                            compress_type=zipfile.ZIP_STORED)  # Writing an empty string creates the directory.
         zipDirectory(full_plugin_path, plugin_zip)
         plugin_zip.write("package.json", "package.json")
     print("Done!")
